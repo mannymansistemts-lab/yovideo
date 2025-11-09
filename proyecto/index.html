@@ -1,171 +1,129 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Generador SEO PRO — Catálogos</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Generador YouTube SEO 2025</title>
   <style>
-    :root{--bg:#071026;--card:#071423;--accent:#ff6b00;--muted:rgba(255,255,255,0.07)}
-    body{font-family:Inter,Arial,Helvetica,sans-serif;background:var(--bg);color:#e6eef8;padding:18px;-webkit-font-smoothing:antialiased}
-    .card{max-width:980px;margin:0 auto;background:rgba(255,255,255,0.03);padding:18px;border-radius:10px}
-    label{display:block;margin-top:10px;font-weight:600;color:#cfe8ff}
-    input,textarea,select{width:100%;padding:10px;border-radius:8px;border:none;background:var(--muted);color:#fff;margin-top:8px;box-sizing:border-box}
-    button{padding:10px 14px;border-radius:8px;border:0;background:var(--accent);color:#071423;font-weight:700;cursor:pointer;margin-top:12px}
-    pre{background:rgba(0,0,0,0.25);padding:10px;border-radius:8px;margin-top:10px;white-space:pre-wrap;min-height:40px}
-    .row{display:flex;gap:12px;flex-wrap:wrap}
-    .col{flex:1;min-width:220px}
-    .small{font-size:13px;color:#9cc9ff}
-    .error{background:#3a1b1b;color:#ffd7d7;padding:8px;border-radius:8px;margin-top:10px}
-    .hint{font-size:13px;color:#b9e0ff;margin-top:6px}
-    .topbar{display:flex;gap:12px;align-items:center;justify-content:space-between}
-    .loading{opacity:0.7}
-    .controls{display:flex;gap:8px;align-items:center;margin-top:8px;flex-wrap:wrap}
+    body {
+      background: #111;
+      color: #fff;
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+    }
+
+    h1 {
+      color: #ff9800;
+      margin-bottom: 10px;
+    }
+
+    input, textarea, button {
+      width: 100%;
+      max-width: 500px;
+      margin-bottom: 10px;
+      padding: 10px;
+      border-radius: 6px;
+      border: none;
+      outline: none;
+      font-size: 16px;
+    }
+
+    button {
+      background: linear-gradient(45deg, #ff9800, #2196f3);
+      color: white;
+      cursor: pointer;
+    }
+
+    #resultado {
+      background: #222;
+      padding: 15px;
+      border-radius: 8px;
+      margin-top: 15px;
+      width: 100%;
+      max-width: 500px;
+      font-size: 15px;
+      white-space: pre-wrap;
+    }
+
+    ul {
+      margin-top: 20px;
+      background: #222;
+      padding: 15px;
+      border-radius: 8px;
+      width: 100%;
+      max-width: 500px;
+    }
+
+    li {
+      margin: 5px 0;
+      color: #ff9800;
+    }
   </style>
 </head>
 <body>
-  <div class="card" id="app">
-    <div class="topbar">
-      <h2>Generador SEO PRO — Catálogos</h2>
-      <div class="small">Versión segura para Netlify (recomendada)</div>
-    </div>
+  <h1>🎯 Generador SEO YouTube 2025</h1>
 
-    <label>Marca / Tema</label>
-    <input id="brand" placeholder="Ej: Fuller">
+  <input id="titulo" placeholder="Escribe el título de tu catálogo (ej. Catálogo Yanbal 2025)" />
+  <textarea id="descripcion" placeholder="Describe brevemente el contenido del catálogo"></textarea>
+  <button onclick="generarSEO()">Generar SEO Optimizado</button>
 
-    <div class="row">
-      <div class="col">
-        <label>Campaña / Código</label>
-        <input id="campaign" placeholder="Ej: Campaña 17">
-      </div>
-      <div class="col">
-        <label>Año</label>
-        <input id="year" value="2025">
-      </div>
-    </div>
+  <div id="resultado"></div>
 
-    <label>Resumen corto (2 líneas)</label>
-    <textarea id="summary" rows="3" placeholder="Ej: Nuevas fragancias, productos para el hogar y promociones para vendedoras."></textarea>
+  <h2>Tendencias Actuales en YouTube México</h2>
+  <ul id="tendencias"><li>Cargando...</li></ul>
 
-    <label>País</label>
-    <select id="country">
-      <option value="MX">México</option>
-      <option value="PE">Perú</option>
-      <option value="CO">Colombia</option>
-      <option value="CL">Chile</option>
-    </select>
+  <script src="trends.js"></script>
+  <script>
+    function generarSEO() {
+      const titulo = document.getElementById("titulo").value.trim();
+      const descripcion = document.getElementById("descripcion").value.trim();
 
-    <div class="controls">
-      <button id="go">Generar SEO PRO (YouTube)</button>
-      <label><input type="checkbox" id="useFallback"> Usar fallback local</label>
-    </div>
+      if (!titulo || !descripcion) {
+        alert("Por favor llena ambos campos");
+        return;
+      }
 
-    <div id="status" class="hint">Estado: listo</div>
-    <div id="err" role="alert" style="display:none" class="error"></div>
+      const hashtags = [
+        "#Ventas2025",
+        "#CatalogosDigitales",
+        "#Emprendedores",
+        "#Mexico",
+        "#Catalogo",
+        "#Ofertas",
+        "#Belleza",
+        "#NuevosLanzamientos",
+        "#MotivacionDeVentas",
+      ];
 
-    <h3>Resultados — Vende Más por Catálogo</h3>
-    <strong>Título:</strong>
-    <pre id="a_title">—</pre>
-    <strong>Descripción:</strong>
-    <pre id="a_desc">—</pre>
-    <strong>Hashtags:</strong>
-    <pre id="a_hash">—</pre>
+      const etiquetas = [
+        "catalogos digitales",
+        "emprendedores 2025",
+        "tendencias mexico",
+        "negocios",
+        "ventas online",
+        "ofertas",
+        "emprendimiento",
+      ];
 
-    <h3>Resultados — Catálogos Virtuales LATAM</h3>
-    <strong>Título:</strong>
-    <pre id="b_title">—</pre>
-    <strong>Descripción:</strong>
-    <pre id="b_desc">—</pre>
-    <strong>Hashtags:</strong>
-    <pre id="b_hash">—</pre>
+      const resultado = `
+📢 TÍTULO SUGERIDO:
+${titulo.toUpperCase()} | ${new Date().getFullYear()}
 
-    <h3>Etiquetas (YouTube Studio)</h3>
-    <pre id="tags">—</pre>
+📝 DESCRIPCIÓN:
+${descripcion}
 
-    <h3>Mejor horario sugerido (MX)</h3>
-    <pre id="hours">—</pre>
+🔥 HASHTAGS:
+${hashtags.join(" ")}
 
-    <div class="hint" style="margin-top:12px">
-      ⚙️ Si la API falla o hay error, activa "Usar fallback local" para generar resultados automáticos.
-    </div>
-  </div>
+🏷️ ETIQUETAS:
+${etiquetas.join(", ")}
+      `;
 
-<script>
-/*
-  Esta versión llama a la función Netlify en:
-  /.netlify/functions/trends
-  (la función usa la API key guardada en las Environment Variables)
-*/
-document.addEventListener('DOMContentLoaded', () => {
-  const API_FN = '/.netlify/functions/trends';
-  const btn = document.getElementById('go');
-  const status = document.getElementById('status');
-  const errBox = document.getElementById('err');
-  const useFallback = document.getElementById('useFallback');
-
-  const safeGet = (o,p,d='—') => p.split('.').reduce((a,c)=> (a && a[c]!=null? a[c]: null), o) ?? d;
-
-  function showError(msg){ errBox.style.display='block'; errBox.textContent=msg; }
-  function clearError(){ errBox.style.display='none'; errBox.textContent=''; }
-
-  function populate(j){
-    document.getElementById('a_title').textContent = safeGet(j,'channelA.title');
-    document.getElementById('a_desc').textContent = safeGet(j,'channelA.description');
-    document.getElementById('a_hash').textContent = (j.channelA?.hashtags||[]).join(' ');
-    document.getElementById('b_title').textContent = safeGet(j,'channelB.title');
-    document.getElementById('b_desc').textContent = safeGet(j,'channelB.description');
-    document.getElementById('b_hash').textContent = (j.channelB?.hashtags||[]).join(' ');
-    document.getElementById('tags').textContent = (j.tags||[]).join(', ');
-    document.getElementById('hours').textContent = (j.bestHours||[]).map(h=>`${h}:00-${h+1}:00`).join(', ');
-  }
-
-  function fallback(){
-    const brand = document.getElementById('brand').value.trim() || 'Marca';
-    const campaign = document.getElementById('campaign').value.trim() || 'Campaña';
-    const year = document.getElementById('year').value.trim() || (new Date()).getFullYear();
-    const summary = document.getElementById('summary').value.trim() || 'Lanzamientos y promociones.';
-    return {
-      channelA:{ title:`Catálogo ${brand} ${campaign} ${year} — Ofertas`, description:`${summary}`, hashtags:[`#${brand}`,`#Catalogos${year}`] },
-      channelB:{ title:`${brand} ${year} | Catálogo`, description:`${summary}`, hashtags:[`#${brand}Oficial`] },
-      tags:[brand,'catalogos','ventas'],
-      bestHours:[19,20]
-    };
-  }
-
-  btn.addEventListener('click', async ()=>{
-    clearError();
-    status.textContent='Generando...';
-    btn.disabled=true;
-    const brand = document.getElementById('brand').value.trim();
-    const campaign = document.getElementById('campaign').value.trim();
-    const summary = document.getElementById('summary').value.trim();
-    const country = document.getElementById('country').value;
-
-    if(useFallback.checked){
-      populate(fallback());
-      status.textContent='Generado (fallback)';
-      btn.disabled=false;
-      return;
+      document.getElementById("resultado").textContent = resultado;
     }
-
-    // llamada a la función serverless (Netlify)
-    try {
-      const q = `?brand=${encodeURIComponent(brand)}&campaign=${encodeURIComponent(campaign)}&summary=${encodeURIComponent(summary)}&country=${encodeURIComponent(country)}`;
-      const resp = await fetch(API_FN + q);
-      if(!resp.ok) throw new Error('HTTP ' + resp.status);
-      const j = await resp.json();
-      if(j.error) throw new Error(j.error);
-      populate(j);
-      status.textContent='Generado desde API';
-    } catch (err) {
-      console.warn('Error API:', err);
-      showError('Error al conectar con la API. Se generó un resultado local.');
-      populate(fallback());
-      status.textContent='Generado (fallback por error)';
-    } finally {
-      btn.disabled=false;
-    }
-  });
-});
-</script>
+  </script>
 </body>
 </html>
