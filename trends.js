@@ -1,6 +1,6 @@
 // trends.js - completo y listo
 // REEMPLAZA: pon tu API key de YouTube aquí (o pon la variable desde Netlify functions)
-const API_KEY = 'YOUR_API_KEY_HERE'; // <- reemplaza esto
+const API_KEY = 'AIzaSyDAQVkMZ_l73dK7pt9gaccYPn5L0vA3PGw'; // <- reemplaza esto
 const YT_BASE = 'https://www.googleapis.com/youtube/v3';
 
 // Config
@@ -300,3 +300,4 @@ document.addEventListener('DOMContentLoaded', () => {
     renderTendencias(['Configura tu API key en trends.js para ver tendencias reales.']);
   }
 });
+
