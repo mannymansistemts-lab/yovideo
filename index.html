@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Generador SEO YouTube 2025 - Nicho Belleza y Calzado</title>
+  <title>Generador SEO YouTube 2025</title>
   <style>
     body {
       background: #111;
@@ -35,7 +35,7 @@
       transition: 0.3s;
     }
     button:hover {
-      opacity: 0.9;
+      transform: scale(1.05);
     }
     #resultado {
       background: #222;
@@ -62,95 +62,70 @@
   </style>
 </head>
 <body>
-  <h1>💄 Generador SEO YouTube 2025</h1>
+  <h1>🎯 Generador SEO YouTube 2025</h1>
 
-  <input id="titulo" placeholder="Ej. Catálogo Yanbal Campaña 1 2025" />
-  <textarea id="descripcion" placeholder="Ej. Ofertas, nuevos productos, calzado o perfumes"></textarea>
+  <input id="titulo" placeholder="Escribe el título del catálogo (ej. Catálogo Yanbal 2025)" />
+  <textarea id="descripcion" placeholder="Describe brevemente el contenido del catálogo"></textarea>
   <button onclick="generarSEO()">Generar SEO Optimizado</button>
 
   <div id="resultado"></div>
 
-  <h2>Tendencias del nicho Belleza y Catálogos</h2>
+  <h2>Tendencias Actuales en YouTube México</h2>
   <ul id="tendencias"><li>Cargando...</li></ul>
 
+  <!-- Conexión con tu API (archivo trends.js) -->
   <script src="trends.js"></script>
+
   <script>
-    async function mostrarTendencias() {
-      try {
-        const lista = await obtenerTendenciasYT(); // Función de tu trends.js
-        const palabrasClave = ["catalogo", "catálogo", "belleza", "cosmetico", "perfume", "calzado", "maquillaje", "avon", "yanbal", "jafra", "arabela", "cyzone", "lbel", "ésika", "emprendedora", "ventas"];
-        const filtradas = lista.filter(t =>
-          palabrasClave.some(p => t.toLowerCase().includes(p))
-        );
-
-        const ul = document.getElementById("tendencias");
-        ul.innerHTML = filtradas.length
-          ? filtradas.map(t => `<li>${t}</li>`).join("")
-          : "<li>No hay tendencias del nicho en este momento.</li>";
-      } catch (e) {
-        document.getElementById("tendencias").innerHTML = "<li>Error al cargar tendencias</li>";
-      }
-    }
-
-    mostrarTendencias();
-
     function generarSEO() {
       const titulo = document.getElementById("titulo").value.trim();
       const descripcion = document.getElementById("descripcion").value.trim();
-
       if (!titulo || !descripcion) {
         alert("Por favor llena ambos campos");
         return;
       }
 
+      const año = new Date().getFullYear();
+
+      // 🔍 Hashtags especializados en tu nicho
       const hashtags = [
-        "#CatalogosDigitales",
-        "#VentasPorCatalogo",
-        "#BellezaYEstilo",
-        "#CosmeticosMexico",
-        "#Calzado2025",
-        "#EmprendedorasMexico",
-        "#OfertasDeBelleza",
-        "#Perfumes2025",
-        "#TendenciasDeBelleza",
-        "#CatalogosLatinos"
+        "#CatalogosDigitales", "#VentasPorCatalogo", "#CosmeticosMexico",
+        "#Calzado2025", "#EmprendedorasLatinas", "#BellezaYEstilo",
+        "#OfertasCatalogo", "#ProductosNuevos", "#Tendencias2025"
       ];
 
+      // 🏷️ Etiquetas SEO optimizadas
       const etiquetas = [
-        "catálogo digital 2025",
-        "catálogos de belleza",
-        "cosméticos y perfumes",
-        "calzado de moda",
-        "emprendedoras México",
-        "ventas por catálogo",
-        "productos de belleza 2025",
-        "ofertas catálogo México",
-        "nuevos lanzamientos cosméticos",
-        "catálogos digitales"
+        "catálogos digitales", "ventas por catálogo", "cosméticos", "calzado",
+        "emprendedoras México", "ofertas 2025", "productos de belleza",
+        "moda y estilo", "promociones catálogo"
       ];
 
-      const horarios = ["12:00-13:00", "22:00-23:00", "9:00-10:00"];
+      // 🕒 Mejores horarios basados en tráfico en MX
+      const horarios = [
+        "12:00-13:00", "18:00-19:00", "21:00-22:00"
+      ];
 
       const resultado = `
-📢 TITULO SUGERIDO:
-${titulo.toUpperCase()} | ${new Date().getFullYear()} | Ofertas y Novedades
+📢 TÍTULO SUGERIDO:
+${titulo.toLowerCase()} ${año} | Ofertas y Novedades
 
 📝 DESCRIPCIÓN SUGERIDA:
 ${descripcion}
 
-Descubre las mejores ofertas y lanzamientos del catálogo ${titulo}. Ideal para emprendedoras, vendedoras y amantes de los cosméticos, perfumes y calzado en MX. Suscríbete para más catálogos y novedades.
+Descubre las mejores ofertas y lanzamientos del catálogo ${titulo.toLowerCase()} ${año}. Ideal para emprendedoras, vendedoras y amantes de los cosméticos y calzado en MX. Suscríbete para más catálogos y novedades.
 
 🔥 HASHTAGS:
 ${hashtags.join(" ")}
 
 🏷️ ETIQUETAS (YouTube Studio):
-${etiquetas.join(", ")}
+${titulo.toLowerCase()}, ${titulo.toLowerCase()} ${año}, ${etiquetas.join(", ")}
 
 ⏰ MEJORES HORARIOS (MX):
 ${horarios.join(", ")}
 
 💡 Alternativa de título:
-${titulo} — Catálogo ${new Date().getFullYear()} (Lo más nuevo)
+${titulo.toLowerCase()} — Catálogo ${año} (Lo más nuevo)
       `;
 
       document.getElementById("resultado").textContent = resultado;
