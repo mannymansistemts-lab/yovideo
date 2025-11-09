@@ -65,7 +65,7 @@
   <h1>💄 Generador SEO YouTube 2025</h1>
 
   <input id="titulo" placeholder="Ej. Catálogo Yanbal Campaña 1 2025" />
-  <textarea id="descripcion" placeholder="Describe brevemente tu video (ej. Ofertas, nuevos productos, calzado o perfumes)"></textarea>
+  <textarea id="descripcion" placeholder="Ej. Ofertas, nuevos productos, calzado o perfumes"></textarea>
   <button onclick="generarSEO()">Generar SEO Optimizado</button>
 
   <div id="resultado"></div>
@@ -75,20 +75,21 @@
 
   <script src="trends.js"></script>
   <script>
-    // Filtra las tendencias a solo las que coinciden con el nicho
-    function filtrarTendenciasNicho(lista) {
-      const palabrasClave = ["catalogo", "belleza", "cosmeticos", "calzado", "perfume", "emprendedoras", "ventas"];
-      return lista.filter(t => palabrasClave.some(p => t.toLowerCase().includes(p.toLowerCase())));
-    }
-
-    // Mostrar tendencias filtradas
     async function mostrarTendencias() {
-      const lista = await obtenerTendenciasYT(); // Tu función de trends.js
-      const filtradas = filtrarTendenciasNicho(lista);
-      const ul = document.getElementById("tendencias");
-      ul.innerHTML = filtradas.length
-        ? filtradas.map(t => `<li>${t}</li>`).join("")
-        : "<li>No hay tendencias del nicho en este momento.</li>";
+      try {
+        const lista = await obtenerTendenciasYT(); // Función de tu trends.js
+        const palabrasClave = ["catalogo", "catálogo", "belleza", "cosmetico", "perfume", "calzado", "maquillaje", "avon", "yanbal", "jafra", "arabela", "cyzone", "lbel", "ésika", "emprendedora", "ventas"];
+        const filtradas = lista.filter(t =>
+          palabrasClave.some(p => t.toLowerCase().includes(p))
+        );
+
+        const ul = document.getElementById("tendencias");
+        ul.innerHTML = filtradas.length
+          ? filtradas.map(t => `<li>${t}</li>`).join("")
+          : "<li>No hay tendencias del nicho en este momento.</li>";
+      } catch (e) {
+        document.getElementById("tendencias").innerHTML = "<li>Error al cargar tendencias</li>";
+      }
     }
 
     mostrarTendencias();
@@ -102,7 +103,6 @@
         return;
       }
 
-      // Hashtags centrados en tu nicho
       const hashtags = [
         "#CatalogosDigitales",
         "#VentasPorCatalogo",
@@ -116,7 +116,6 @@
         "#CatalogosLatinos"
       ];
 
-      // Etiquetas SEO optimizadas
       const etiquetas = [
         "catálogo digital 2025",
         "catálogos de belleza",
@@ -130,7 +129,7 @@
         "catálogos digitales"
       ];
 
-      const horarios = ["6:00-7:00", "11:00-12:00", "7:00-8:00"];
+      const horarios = ["12:00-13:00", "22:00-23:00", "9:00-10:00"];
 
       const resultado = `
 📢 TITULO SUGERIDO:
@@ -139,7 +138,7 @@ ${titulo.toUpperCase()} | ${new Date().getFullYear()} | Ofertas y Novedades
 📝 DESCRIPCIÓN SUGERIDA:
 ${descripcion}
 
-Descubre las mejores ofertas y lanzamientos del catálogo ${titulo}. Ideal para emprendedoras, vendedoras y amantes de los cosméticos, perfumes y calzado en México. Suscríbete para más catálogos y novedades.
+Descubre las mejores ofertas y lanzamientos del catálogo ${titulo}. Ideal para emprendedoras, vendedoras y amantes de los cosméticos, perfumes y calzado en MX. Suscríbete para más catálogos y novedades.
 
 🔥 HASHTAGS:
 ${hashtags.join(" ")}
