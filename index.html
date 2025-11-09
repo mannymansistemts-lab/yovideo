@@ -1,117 +1,129 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Generador SEO PRO — TS Docentes</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Generador YouTube SEO 2025</title>
   <style>
-    :root{--bg:#071026;--card:#0a1426;--accent:#ff6b00;--muted:rgba(255,255,255,0.07)}
-    body{font-family:Inter,Arial,Helvetica,sans-serif;background:var(--bg);color:#e6eef8;padding:18px}
-    .card{max-width:960px;margin:auto;background:rgba(255,255,255,0.03);padding:20px;border-radius:12px}
-    label{display:block;margin-top:10px;font-weight:600;color:#cfe8ff}
-    input,textarea,select{width:100%;padding:10px;border-radius:8px;border:none;background:var(--muted);color:#fff;margin-top:8px}
-    button{padding:10px 18px;border-radius:8px;border:0;background:var(--accent);color:#071423;font-weight:700;cursor:pointer;margin-top:12px}
-    pre{background:rgba(0,0,0,0.3);padding:10px;border-radius:8px;margin-top:10px;white-space:pre-wrap;min-height:40px}
-    .row{display:flex;gap:12px;flex-wrap:wrap}
-    .col{flex:1;min-width:220px}
-    .error{background:#3a1b1b;color:#ffd7d7;padding:8px;border-radius:8px;margin-top:10px}
-    .hint{font-size:13px;color:#b9e0ff;margin-top:6px}
-    h2{text-align:center;color:#fff;margin-bottom:8px}
+    body {
+      background: #111;
+      color: #fff;
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+    }
+
+    h1 {
+      color: #ff9800;
+      margin-bottom: 10px;
+    }
+
+    input, textarea, button {
+      width: 100%;
+      max-width: 500px;
+      margin-bottom: 10px;
+      padding: 10px;
+      border-radius: 6px;
+      border: none;
+      outline: none;
+      font-size: 16px;
+    }
+
+    button {
+      background: linear-gradient(45deg, #ff9800, #2196f3);
+      color: white;
+      cursor: pointer;
+    }
+
+    #resultado {
+      background: #222;
+      padding: 15px;
+      border-radius: 8px;
+      margin-top: 15px;
+      width: 100%;
+      max-width: 500px;
+      font-size: 15px;
+      white-space: pre-wrap;
+    }
+
+    ul {
+      margin-top: 20px;
+      background: #222;
+      padding: 15px;
+      border-radius: 8px;
+      width: 100%;
+      max-width: 500px;
+    }
+
+    li {
+      margin: 5px 0;
+      color: #ff9800;
+    }
   </style>
 </head>
 <body>
-  <div class="card">
-    <h2>🎯 Generador SEO PRO — Catálogos</h2>
+  <h1>🎯 Generador SEO YouTube 2025</h1>
 
-    <label>Marca / Catálogo</label>
-    <input id="brand" placeholder="Ej: Fuller, Jafra, Yanbal...">
+  <input id="titulo" placeholder="Escribe el título de tu catálogo (ej. Catálogo Yanbal 2025)" />
+  <textarea id="descripcion" placeholder="Describe brevemente el contenido del catálogo"></textarea>
+  <button onclick="generarSEO()">Generar SEO Optimizado</button>
 
-    <div class="row">
-      <div class="col">
-        <label>Campaña / Código</label>
-        <input id="campaign" placeholder="Ej: Campaña 17 o Enero 2025">
-      </div>
-      <div class="col">
-        <label>Año</label>
-        <input id="year" value="2025">
-      </div>
-    </div>
+  <div id="resultado"></div>
 
-    <label>Resumen breve</label>
-    <textarea id="summary" rows="3" placeholder="Ej: Nuevas fragancias, cosméticos y ofertas exclusivas."></textarea>
-
-    <label>País</label>
-    <select id="country">
-      <option value="MX">México</option>
-      <option value="PE">Perú</option>
-      <option value="CO">Colombia</option>
-      <option value="CL">Chile</option>
-    </select>
-
-    <label>Selecciona tu canal</label>
-    <select id="channel">
-      <option value="vende">🟠 Vende Más por Catálogo</option>
-      <option value="virtuales">🔵 Catálogos Virtuales LATAM</option>
-    </select>
-
-    <button id="generate">Generar SEO PRO</button>
-
-    <div id="error" class="error" style="display:none;"></div>
-
-    <h3>🧾 Resultados SEO</h3>
-    <strong>Título:</strong>
-    <pre id="title">—</pre>
-    <strong>Descripción:</strong>
-    <pre id="description">—</pre>
-    <strong>Hashtags:</strong>
-    <pre id="hashtags">—</pre>
-    <strong>Etiquetas (YouTube Studio):</strong>
-    <pre id="tags">—</pre>
-
-    <div class="hint">💡 Si la API no responde, el generador usa un modo local para crear ejemplos.</div>
-  </div>
+  <h2>Tendencias Actuales en YouTube México</h2>
+  <ul id="tendencias"><li>Cargando...</li></ul>
 
   <script src="trends.js"></script>
   <script>
-  document.getElementById('generate').addEventListener('click', async () => {
-    const brand = document.getElementById('brand').value.trim();
-    const campaign = document.getElementById('campaign').value.trim();
-    const year = document.getElementById('year').value.trim();
-    const summary = document.getElementById('summary').value.trim();
-    const country = document.getElementById('country').value;
-    const channel = document.getElementById('channel').value;
-    const err = document.getElementById('error');
-    err.style.display = 'none';
+    function generarSEO() {
+      const titulo = document.getElementById("titulo").value.trim();
+      const descripcion = document.getElementById("descripcion").value.trim();
 
-    if (!brand) {
-      err.textContent = 'Por favor escribe una marca o catálogo.';
-      err.style.display = 'block';
-      return;
-    }
-
-    try {
-      const data = await getYouTubeTrends(brand, campaign, summary, country);
-      let title, description, hashtags;
-
-      if (channel === 'vende') {
-        title = `Catálogo ${brand} ${campaign} ${year} — Ofertas y Novedades`;
-        description = `Descubre el catálogo ${brand} ${campaign} ${year}. ${summary} Perfecto para vendedoras en ${country}.`;
-        hashtags = [`#${brand}`, `#Catalogos${year}`, '#Ventas', '#MotivacionDeVentas', '#CatalogosDigitales'];
-      } else {
-        title = `${brand} ${campaign} ${year} — Catálogos Virtuales LATAM`;
-        description = `Explora el catálogo digital de ${brand}. ${summary} Disponible para todo ${country}.`;
-        hashtags = [`#${brand}${year}`, '#CatalogosVirtuales', '#Novedades', '#CatalogosOnline'];
+      if (!titulo || !descripcion) {
+        alert("Por favor llena ambos campos");
+        return;
       }
 
-      document.getElementById('title').textContent = title;
-      document.getElementById('description').textContent = description;
-      document.getElementById('hashtags').textContent = hashtags.join(' ');
-      document.getElementById('tags').textContent = data.tags ? data.tags.join(', ') : 'ventas, catalogos, belleza, novedades';
-    } catch (e) {
-      err.textContent = 'Error al conectar con la API o generar resultados.';
-      err.style.display = 'block';
+      const hashtags = [
+        "#Ventas2025",
+        "#CatalogosDigitales",
+        "#Emprendedores",
+        "#Mexico",
+        "#Catalogo",
+        "#Ofertas",
+        "#Belleza",
+        "#NuevosLanzamientos",
+        "#MotivacionDeVentas",
+      ];
+
+      const etiquetas = [
+        "catalogos digitales",
+        "emprendedores 2025",
+        "tendencias mexico",
+        "negocios",
+        "ventas online",
+        "ofertas",
+        "emprendimiento",
+      ];
+
+      const resultado = `
+📢 TÍTULO SUGERIDO:
+${titulo.toUpperCase()} | ${new Date().getFullYear()}
+
+📝 DESCRIPCIÓN:
+${descripcion}
+
+🔥 HASHTAGS:
+${hashtags.join(" ")}
+
+🏷️ ETIQUETAS:
+${etiquetas.join(", ")}
+      `;
+
+      document.getElementById("resultado").textContent = resultado;
     }
-  });
   </script>
 </body>
 </html>
