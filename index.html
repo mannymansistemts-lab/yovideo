@@ -66,96 +66,37 @@
 
   <input id="titulo" placeholder="Ej. Catálogo Yanbal Campaña 1 2025" />
   <textarea id="descripcion" placeholder="Ej. Ofertas, nuevos productos, calzado o perfumes"></textarea>
-  <button onclick="generarSEO()">Generar SEO Optimizado</button>
+  <button id="generarBtn">Generar SEO Optimizado</button>
 
   <div id="resultado"></div>
 
   <h2>Tendencias del nicho Belleza y Catálogos</h2>
   <ul id="tendencias"><li>Cargando...</li></ul>
 
+  <div id="err" style="display:none;color:red;"></div>
+  <div id="status" style="margin-top:10px;color:#aaa;"></div>
+
+  <!-- Tu archivo con el API Key y funciones -->
   <script src="trends.js"></script>
+
   <script>
-    async function mostrarTendencias() {
-      try {
-        const lista = await obtenerTendenciasYT(); // Función de tu trends.js
-        const palabrasClave = ["catalogo", "catálogo", "belleza", "cosmetico", "perfume", "calzado", "maquillaje", "avon", "yanbal", "jafra", "arabela", "cyzone", "lbel", "ésika", "emprendedora", "ventas"];
-        const filtradas = lista.filter(t =>
-          palabrasClave.some(p => t.toLowerCase().includes(p))
-        );
+    document.addEventListener("DOMContentLoaded", () => {
+      // Conecta al API de YouTube usando tu trends.js
+      runGenerator({
+        brand: 'Yanbal',
+        campaign: 'Campaña 1',
+        summary: 'Catálogo de belleza y calzado 2025 con ofertas y novedades.',
+        country: 'MX'
+      });
 
-        const ul = document.getElementById("tendencias");
-        ul.innerHTML = filtradas.length
-          ? filtradas.map(t => `<li>${t}</li>`).join("")
-          : "<li>No hay tendencias del nicho en este momento.</li>";
-      } catch (e) {
-        document.getElementById("tendencias").innerHTML = "<li>Error al cargar tendencias</li>";
-      }
-    }
-
-    mostrarTendencias();
-
-    function generarSEO() {
-      const titulo = document.getElementById("titulo").value.trim();
-      const descripcion = document.getElementById("descripcion").value.trim();
-
-      if (!titulo || !descripcion) {
-        alert("Por favor llena ambos campos");
-        return;
-      }
-
-      const hashtags = [
-        "#CatalogosDigitales",
-        "#VentasPorCatalogo",
-        "#BellezaYEstilo",
-        "#CosmeticosMexico",
-        "#Calzado2025",
-        "#EmprendedorasMexico",
-        "#OfertasDeBelleza",
-        "#Perfumes2025",
-        "#TendenciasDeBelleza",
-        "#CatalogosLatinos"
-      ];
-
-      const etiquetas = [
-        "catálogo digital 2025",
-        "catálogos de belleza",
-        "cosméticos y perfumes",
-        "calzado de moda",
-        "emprendedoras México",
-        "ventas por catálogo",
-        "productos de belleza 2025",
-        "ofertas catálogo México",
-        "nuevos lanzamientos cosméticos",
-        "catálogos digitales"
-      ];
-
-      const horarios = ["12:00-13:00", "22:00-23:00", "9:00-10:00"];
-
-      const resultado = `
-📢 TITULO SUGERIDO:
-${titulo.toUpperCase()} | ${new Date().getFullYear()} | Ofertas y Novedades
-
-📝 DESCRIPCIÓN SUGERIDA:
-${descripcion}
-
-Descubre las mejores ofertas y lanzamientos del catálogo ${titulo}. Ideal para emprendedoras, vendedoras y amantes de los cosméticos, perfumes y calzado en MX. Suscríbete para más catálogos y novedades.
-
-🔥 HASHTAGS:
-${hashtags.join(" ")}
-
-🏷️ ETIQUETAS (YouTube Studio):
-${etiquetas.join(", ")}
-
-⏰ MEJORES HORARIOS (MX):
-${horarios.join(", ")}
-
-💡 Alternativa de título:
-${titulo} — Catálogo ${new Date().getFullYear()} (Lo más nuevo)
-      `;
-
-      document.getElementById("resultado").textContent = resultado;
-    }
+      // Botón manual para generar SEO con tus campos
+      const btn = document.getElementById("generarBtn");
+      btn.addEventListener("click", async () => {
+        const brand = document.getElementById("titulo").value.trim();
+        const summary = document.getElementById("descripcion").value.trim();
+        await runGenerator({ brand, campaign: '', summary, country: 'MX' });
+      });
+    });
   </script>
 </body>
 </html>
-
